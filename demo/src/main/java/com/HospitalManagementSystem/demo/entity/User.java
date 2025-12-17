@@ -2,6 +2,7 @@ package com.HospitalManagementSystem.demo.entity;
 
 import com.HospitalManagementSystem.demo.entity.type.AuthProviderType;
 import com.HospitalManagementSystem.demo.entity.type.RoleType;
+import com.HospitalManagementSystem.demo.security.RolePermissionMapping;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,8 +32,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String username;
+
 
     private String password;
 
@@ -41,40 +43,26 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AuthProviderType providerType;
 
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @Enumerated(EnumType.STRING)
-//    Set<RoleType> roles = new HashSet<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    Set<RoleType> roles = new HashSet<>();
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+//        return roles.stream()
+//                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.name()))
+//                .collect(Collectors.toSet());
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        roles.forEach(
+                role -> {
+                    Set<SimpleGrantedAuthority> permissions = RolePermissionMapping.getAuthoritiesForRole(role);
+                    authorities.addAll(permissions);
+                    authorities.add(new SimpleGrantedAuthority("ROLE_%s".formatted(role.name())));
+                }
+        );
+        return authorities;
+
+
     }
-//
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return List.of();
-//    }
-//
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return List.of();
-//    }
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-////        return roles.stream()
-////                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.name()))
-////                .collect(Collectors.toSet());
-//        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-//        roles.forEach(
-//                role -> {
-//                    Set<SimpleGrantedAuthority> permissions = RolePermissionMapping.getAuthoritiesForRole(role);
-//                    authorities.addAll(permissions);
-//                    authorities.add(new SimpleGrantedAuthority("ROLE_"+role.name()));
-//                }
-//        );
-//        return authorities;
-
-
 }
