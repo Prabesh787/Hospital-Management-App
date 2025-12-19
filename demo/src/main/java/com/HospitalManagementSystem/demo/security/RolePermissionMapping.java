@@ -14,7 +14,7 @@ import static com.HospitalManagementSystem.demo.entity.type.RoleType.*;
 public class RolePermissionMapping {
 
     private static final Map<RoleType, Set<PermissionType>> map = Map.of(
-            PATIENT, Set.of(PATIENT_READ, APPOINTMENT_READ, APPOINTMENT_WRITE),
+            PATIENT, Set.of( APPOINTMENT_READ, APPOINTMENT_WRITE),
             DOCTOR, Set.of(APPOINTMENT_DELETE, APPOINTMENT_WRITE, APPOINTMENT_READ, PATIENT_READ),
             ADMIN, Set.of(PATIENT_READ, PATIENT_WRITE, APPOINTMENT_READ, APPOINTMENT_WRITE, APPOINTMENT_DELETE, USER_MANAGE, REPORT_VIEW)
     );

@@ -1,6 +1,7 @@
 package com.HospitalManagementSystem.demo.service;
 
 
+import com.HospitalManagementSystem.demo.dto.PatientResponseDto;
 import com.HospitalManagementSystem.demo.entity.Appointment;
 import com.HospitalManagementSystem.demo.entity.Insurance;
 import com.HospitalManagementSystem.demo.entity.Patient;
@@ -10,6 +11,7 @@ import com.HospitalManagementSystem.demo.repository.PatientRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,16 +21,17 @@ public class InsuranceService {
     private final InsuranceRepository insuranceRepository;
     private final PatientRepository patientRepository;
     private DoctorRepository doctorRepository;
+    private final ModelMapper modelMapper;
 
     @Transactional
-    public Patient assignInsuranceToPatient(Insurance insurance, Long patientId){
+    public PatientResponseDto assignInsuranceToPatient(Insurance insurance, Long patientId){
         Patient patient= patientRepository.findById(patientId)
                 .orElseThrow(() -> new EntityNotFoundException("Patient not found with id: %d".formatted(patientId)));
 
         patient.setInsurance(insurance);
         insurance.setPatient(patient);
 
-        return patient;
+        return modelMapper.map(patient, PatientResponseDto.class);
 
     }
 

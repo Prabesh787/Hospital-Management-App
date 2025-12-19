@@ -3,43 +3,29 @@ package com.HospitalManagementSystem.demo.config;
 
 import com.HospitalManagementSystem.demo.security.JWTAuthFilter;
 import com.HospitalManagementSystem.demo.security.OAuth2SuccessHandler;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-
-import java.io.IOException;
 
 import static com.HospitalManagementSystem.demo.entity.type.PermissionType.*;
 import static com.HospitalManagementSystem.demo.entity.type.RoleType.ADMIN;
 import static com.HospitalManagementSystem.demo.entity.type.RoleType.*;
 
-
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
+@EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
     private final PasswordEncoder passwordEncoder;

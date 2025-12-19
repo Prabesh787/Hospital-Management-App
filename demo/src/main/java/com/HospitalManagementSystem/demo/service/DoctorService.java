@@ -51,6 +51,4 @@ public class DoctorService {
 
         return modelMapper.map(doctorRepository.save(doctor), DoctorResponseDto.class);
     }
-
-
 }

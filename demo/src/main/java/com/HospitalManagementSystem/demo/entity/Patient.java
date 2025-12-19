@@ -20,8 +20,7 @@ import java.util.List;
 @Table(
         name = "patient",
         uniqueConstraints = {
-                @UniqueConstraint(name = "unique_patient_email", columnNames = {"email"}),
-                @UniqueConstraint(name = "unique_patient_name_birthdate", columnNames = {"name", "birthDate"})
+                @UniqueConstraint(name = "unique_patient_email", columnNames = {"email"})
         },
         indexes = {
                 @Index(name = "idx_patient_birth_date", columnList = "birthDate")
@@ -33,37 +32,47 @@ import java.util.List;
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // shared with User (via @MapsId)
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(nullable = false, length = 40)
     private String name;
 
-    //    @ToString.Exclude
-    private LocalDate birthDate;
 
-    @Column(unique = true, nullable = false)
+    /* ========= Profile fields (nullable initially) ========= */
+
+    @Column(unique = true)
     private String email;
 
+    private LocalDate birthDate;
+
     private String gender;
-
-    @OneToOne
-    @MapsId
-    private User user;
-
-    @CreationTimestamp
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
 
-    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
-    @JoinColumn(name = "patient_insurance_id") // owning side
+    /* ========= Profile completion flag ========= */
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean profileCompleted = false;
+
+    /* ========= Relationships ========= */
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "insurance_id")
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();
 
+    /* ========= Metadata ========= */
 
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 }

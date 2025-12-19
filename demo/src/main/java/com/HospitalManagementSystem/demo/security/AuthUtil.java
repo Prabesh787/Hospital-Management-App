@@ -9,6 +9,8 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,24 @@ public class AuthUtil {
 
     private SecretKey getSecretKey(){
         return Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public Long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new IllegalStateException("No authenticated user found");
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof User user) {
+            return user.getId();
+        }
+
+        throw new IllegalStateException("Unsupported authentication principal: %s".formatted(principal.getClass()));
     }
 
     public String generateAccessToken(User user){
@@ -84,6 +104,10 @@ public class AuthUtil {
             case "github" -> oAuth2User.getAttribute("login");
             default -> providerId;
         };
+    }
+
+    public boolean isOwner(Long resourceUserId, User principal) {
+        return principal.getId().equals(resourceUserId);
     }
 
 }

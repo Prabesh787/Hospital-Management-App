@@ -35,6 +35,6 @@ public class Doctor {
     @ManyToMany(mappedBy = "doctors")
     private Set<Department> departments = new HashSet<>();
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments = new ArrayList<>();
 }

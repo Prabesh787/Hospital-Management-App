@@ -1,6 +1,9 @@
 package com.HospitalManagementSystem.demo.controller;
 
+import com.HospitalManagementSystem.demo.dto.AppointmentResponseDto;
+import com.HospitalManagementSystem.demo.dto.PatientProfileUpdateDto;
 import com.HospitalManagementSystem.demo.dto.PatientResponseDto;
+import com.HospitalManagementSystem.demo.security.AuthUtil;
 import com.HospitalManagementSystem.demo.service.AppointmentService;
 import com.HospitalManagementSystem.demo.service.PatientService;
 import lombok.RequiredArgsConstructor;
@@ -16,25 +19,23 @@ public class PatientController{
 
     private final PatientService patientService;
     private final AppointmentService appointmentService;
+    private final AuthUtil authUtil;
 
-//    @PostMapping("/appointments")
-//    public ResponseEntity<AppointmentResponseDto> createNewAppointment(@RequestBody CreateAppointmentResponseDto createAppointmentResponseDto){
-//        return ResponseEntity.status(HttpStatus.CREATED).body(appointmentService.createNewAppointment(createAppointmentResponseDto));
-//
-//    }
 
-    @GetMapping("/patient/profile")
-    public ResponseEntity<PatientResponseDto> getPatientProfile(){
-        Long patientId = 4L;
+    @GetMapping("/patient/profile/{patientId}")
+    public ResponseEntity<PatientResponseDto> getPatientProfile(@PathVariable Long patientId){
         return ResponseEntity.ok(patientService.getPatientById(patientId));
     }
 
-    @GetMapping("/admin/patients")
-    public List<PatientResponseDto> getAllPatients(
-            @RequestParam(defaultValue = "0") Integer pageNumber,
-            @RequestParam(defaultValue = "10") Integer pageSize
-    ) {
-        return patientService.getAllPatients(pageNumber, pageSize);
+    @GetMapping("/appointment/{patientId}")
+    public ResponseEntity<List<AppointmentResponseDto>> getPatientAppointment(@PathVariable Long patientId){
+        return ResponseEntity.ok(appointmentService.getAllAppointmentOfPatient(patientId));
+    }
+
+    @PatchMapping("/patient/profile/update")
+    public ResponseEntity<PatientResponseDto> updatePatientProfile( @RequestBody PatientProfileUpdateDto patientProfileUpdateDto){
+        Long userId = authUtil.getCurrentUserId();
+        return ResponseEntity.ok(patientService.updatePatientProfile(userId, patientProfileUpdateDto));
     }
 
 }

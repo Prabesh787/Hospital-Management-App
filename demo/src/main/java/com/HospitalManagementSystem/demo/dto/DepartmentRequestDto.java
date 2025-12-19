@@ -1,11 +1,13 @@
 package com.HospitalManagementSystem.demo.dto;
 
+
 import lombok.Data;
 
-@Data
-public class OnboardDocotorRequestDto {
 
-    private Long userId;
-    private String specialization;
+@Data
+public class DepartmentRequestDto {
+
     private String name;
+
+    private Long headDoctorId;
 }

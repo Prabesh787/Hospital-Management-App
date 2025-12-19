@@ -1,17 +1,20 @@
 package com.HospitalManagementSystem.demo.dto;
 
 import com.HospitalManagementSystem.demo.entity.type.BloodGroupType;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Data
-public class PatientResponseDto {
-    private Long id;
-    private String name;
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class PatientProfileUpdateDto {
+
     private String email;
-    private String gender;
     private LocalDate birthDate;
+    private String gender;
     private BloodGroupType bloodGroup;
-    private Long insurance_id;
+
 }

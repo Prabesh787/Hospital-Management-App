@@ -25,7 +25,7 @@ public class Appointment {
     @Column(length = 500)
     private String reason;
 
-    @ManyToOne
+    @ManyToOne()
     @ToString.Exclude
     @JoinColumn(name = "patient_id", nullable = false) // patient is required and not nullable
     private Patient patient;

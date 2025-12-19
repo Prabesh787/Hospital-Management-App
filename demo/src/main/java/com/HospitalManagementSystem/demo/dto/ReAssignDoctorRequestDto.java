@@ -1,5 +1,6 @@
 package com.HospitalManagementSystem.demo.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OnboardDoctorRequestDto {
-    private Long userId;
-    private String specialization;
-    private String name;
+public class ReAssignDoctorRequestDto {
+
+    Long appointmentId;
+    Long doctorId;
 }

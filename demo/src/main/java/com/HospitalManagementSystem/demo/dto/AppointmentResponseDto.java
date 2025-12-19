@@ -1,5 +1,6 @@
 package com.HospitalManagementSystem.demo.dto;
 
+import com.HospitalManagementSystem.demo.entity.Doctor;
 import com.HospitalManagementSystem.demo.repository.DoctorRepository;
 import lombok.Data;
 
@@ -12,5 +13,7 @@ public class AppointmentResponseDto {
     private Long id;
     private LocalDateTime appointmentTime;
     private String reason;
-    private DoctorRepository doctor;
+    private DoctorResponseDto doctor;
+    private PatientResponseDto patient;
+
 }

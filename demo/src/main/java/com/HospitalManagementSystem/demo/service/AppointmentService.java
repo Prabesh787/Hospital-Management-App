@@ -32,9 +32,10 @@ public class AppointmentService {
 
     @Transactional
     @Secured("ROLE_PATIENT")
-    public AppointmentResponseDto createNewAppointment(CreateAppointmentRequestDto createAppointmentRequestDto){
+    @PreAuthorize("(hasRole('ROLE_PATIENT') and #patientId == authentication.principal.id)")
+    public AppointmentResponseDto createNewAppointment(CreateAppointmentRequestDto createAppointmentRequestDto, Long patientId){
         Long doctorId = createAppointmentRequestDto.getDoctorId();
-        Long patientId = createAppointmentRequestDto.getPatientId();
+//        Long patientId = createAppointmentRequestDto.getPatientId();
 
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new EntityNotFoundException("Patient not found with ID: %d".formatted(patientId)));
@@ -46,27 +47,46 @@ public class AppointmentService {
                 .build();
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);
-        patient.getAppointments().add(appointment); // to maintain consistency
+        patient.getAppointments().add(appointment);
+        doctor.getAppointments().add(appointment); // to maintain consistency
 
         appointment = appointmentRepository.save(appointment);
         return modelMapper.map(appointment, AppointmentResponseDto.class);
-
     }
 
     @Transactional
-    @PreAuthorize("hasAuthority('appointment:write') or #doctorId == authentication.principal.id")
-    public Appointment reAssignAppointmentToAnotherDoctor(Long appointmentId, Long doctorId){
+//    @PreAuthorize("hasAuthority('appointment:write') or #doctorId == authentication.principal.id")
+    public AppointmentResponseDto reAssignAppointmentToAnotherDoctor(Long appointmentId, Long doctorId){
         Appointment appointment= appointmentRepository.findById(appointmentId).orElseThrow();
         Doctor doctor= doctorRepository.findById(doctorId).orElseThrow();
 
         appointment.setDoctor(doctor);
         doctor.getAppointments().add(appointment);
-        return appointment;
+        return modelMapper.map(appointment, AppointmentResponseDto.class);
     }
 
     @PreAuthorize("hasAuthority('appointment:write') or #doctorId == authentication.principal.id")
     public List<AppointmentResponseDto> getAllAppointmentOfDoctor(Long doctorId){
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
+
+        return doctor.getAppointments()
+                .stream()
+                .map(appointment -> modelMapper.map(appointment, AppointmentResponseDto.class))
+                .collect(Collectors.toList());
+    }
+
+
+    public List<AppointmentResponseDto> getAllAppointment(){
+
+        return appointmentRepository.findAll()
+                .stream()
+                .map(appointment -> modelMapper.map(appointment, AppointmentResponseDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @PreAuthorize("(hasRole('ROLE_PATIENT') and #patientId == authentication.principal.id)")
+    public List<AppointmentResponseDto> getAllAppointmentOfPatient(Long patientId){
+        Patient doctor = patientRepository.findById(patientId).orElseThrow();
 
         return doctor.getAppointments()
                 .stream()

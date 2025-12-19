@@ -57,7 +57,7 @@ public class AuthService {
                 .username(signupRequestDto.getUsername())
                 .providerId(providerId)
                 .providerType(authProviderType)
-                .roles(signupRequestDto.getRoles()) // Role.PATIENT
+                .roles(Set.of(RoleType.PATIENT)) // Role.PATIENT
                 .build();
 
         if(authProviderType == AuthProviderType.EMAIL) {
@@ -103,7 +103,7 @@ public class AuthService {
                 userRepository.save(user);
             }
         } else {
-            throw new BadCredentialsException("This email is already registered with provider "+emailUser.getProviderType());
+            throw new BadCredentialsException("This email is already registered with provider %s".formatted(emailUser.getProviderType()));
         }
 
         LoginResponseDto loginResponseDto = new LoginResponseDto(authUtil.generateAccessToken(user), user.getId());
