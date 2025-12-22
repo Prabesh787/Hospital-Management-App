@@ -38,4 +38,7 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments = new ArrayList<>();
+
+    private Integer feePerSession;
+
 }

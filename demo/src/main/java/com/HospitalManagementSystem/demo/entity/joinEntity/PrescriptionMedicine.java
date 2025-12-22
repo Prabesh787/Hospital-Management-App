@@ -30,7 +30,7 @@ public class PrescriptionMedicine {
     private Medicine medicine;
 
     private Integer quantity;
-    private String dosage;
+//    private String dosage;
     private String frequency;
     private Integer duration; // days
     private String notes;

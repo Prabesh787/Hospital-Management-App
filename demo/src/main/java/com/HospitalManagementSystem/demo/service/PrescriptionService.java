@@ -6,28 +6,20 @@ import com.HospitalManagementSystem.demo.entity.joinEntity.PrescriptionMedicine;
 import com.HospitalManagementSystem.demo.entity.masterEntity.Medicine;
 import com.HospitalManagementSystem.demo.entity.transactionalEntity.Appointment;
 import com.HospitalManagementSystem.demo.entity.transactionalEntity.Prescription;
-import com.HospitalManagementSystem.demo.entity.type.AppointmentStatus;
 import com.HospitalManagementSystem.demo.repository.AppointmentRepository;
 import com.HospitalManagementSystem.demo.repository.MedicineRepository;
 import com.HospitalManagementSystem.demo.repository.PrescriptionMedicineRepository;
 import com.HospitalManagementSystem.demo.repository.PrescriptionRepository;
 import com.HospitalManagementSystem.demo.security.AuthUtil;
-import com.HospitalManagementSystem.demo.security.CustomUserDetailsService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jspecify.annotations.Nullable;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.AccessDeniedException;
 import java.util.List;
-import java.util.stream.Collectors;
-
 
 @Slf4j
 @Service
@@ -87,7 +79,6 @@ public class PrescriptionService {
                     return PrescriptionMedicine.builder()
                             .prescription(prescription)  // SET THE PRESCRIPTION REFERENCE
                             .medicine(medicine)
-                            .dosage(medicineDto.getDosage())
                             .frequency(medicineDto.getFrequency())
                             .duration(medicineDto.getDuration())
                             .quantity(medicineDto.getQuantity())
@@ -113,4 +104,45 @@ public class PrescriptionService {
         // Return the saved prescription as response DTO
         return modelMapper.map(savedPrescription, PrescriptionResponseDto.class);
     }
+
+   public PrescriptionResponseDto getPrescriptionOfAppointment(Long appointmentId){
+       // Fetch the appointment with prescription
+       Appointment appointment = appointmentRepository.findById(appointmentId)
+               .orElseThrow(() -> new EntityNotFoundException("Appointment not found with id: %d".formatted(appointmentId)));
+
+       // Check if prescription exists
+       Prescription prescription = appointment.getPrescription();
+       if (prescription == null) {
+           throw new EntityNotFoundException("No prescription found for appointment id: %d".formatted(appointmentId));
+       }
+
+       return modelMapper.map(prescription, PrescriptionResponseDto.class);
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

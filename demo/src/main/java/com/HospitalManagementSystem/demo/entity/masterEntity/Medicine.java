@@ -1,10 +1,9 @@
 package com.HospitalManagementSystem.demo.entity.masterEntity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -28,4 +27,7 @@ public class Medicine {
     private String strength; // e.g., 500mg, 250mg
 
     private String form; // Tablet, Syrup, Injection
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 }

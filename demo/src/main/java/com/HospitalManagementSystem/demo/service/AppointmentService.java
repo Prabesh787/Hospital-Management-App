@@ -78,6 +78,7 @@ public class AppointmentService {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<AppointmentResponseDto> getAllAppointment(){
 
         return appointmentRepository.findAll()

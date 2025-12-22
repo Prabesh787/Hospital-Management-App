@@ -51,7 +51,6 @@ public class MedicineService {
                 .collect(Collectors.toList());
     }
 
-
     public MedicineResponseDto getMedicineById(Long id) {
        Medicine medicine = medicineRepository.findById(id).orElseThrow();
         return modelMapper.map(medicine, MedicineResponseDto.class);
