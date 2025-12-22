@@ -1,10 +1,10 @@
 package com.HospitalManagementSystem.demo.service;
 
 
-import com.HospitalManagementSystem.demo.dto.DepartmentRequestDto;
-import com.HospitalManagementSystem.demo.dto.DepartmentResponseDto;
-import com.HospitalManagementSystem.demo.entity.Department;
-import com.HospitalManagementSystem.demo.entity.Doctor;
+import com.HospitalManagementSystem.demo.dto.departmentDto.DepartmentRequestDto;
+import com.HospitalManagementSystem.demo.dto.departmentDto.DepartmentResponseDto;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Department;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Doctor;
 import com.HospitalManagementSystem.demo.repository.DepartmentRepository;
 import com.HospitalManagementSystem.demo.repository.DoctorRepository;
 import jakarta.persistence.EntityNotFoundException;

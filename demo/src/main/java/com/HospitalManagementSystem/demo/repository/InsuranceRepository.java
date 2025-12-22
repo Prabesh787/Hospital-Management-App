@@ -1,6 +1,6 @@
 package com.HospitalManagementSystem.demo.repository;
 
-import com.HospitalManagementSystem.demo.entity.Insurance;
+import com.HospitalManagementSystem.demo.entity.transactionalEntity.Insurance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,11 +1,9 @@
 package com.HospitalManagementSystem.demo.controller;
 
 
-import com.HospitalManagementSystem.demo.dto.AppointmentResponseDto;
-import com.HospitalManagementSystem.demo.dto.CreateAppointmentRequestDto;
-import com.HospitalManagementSystem.demo.dto.DoctorResponseDto;
-import com.HospitalManagementSystem.demo.dto.ReAssignDoctorRequestDto;
-import com.HospitalManagementSystem.demo.entity.Appointment;
+import com.HospitalManagementSystem.demo.dto.appointmentDto.AppointmentResponseDto;
+import com.HospitalManagementSystem.demo.dto.appointmentDto.CreateAppointmentRequestDto;
+import com.HospitalManagementSystem.demo.dto.doctorDto.ReAssignDoctorRequestDto;
 import com.HospitalManagementSystem.demo.security.AuthUtil;
 import com.HospitalManagementSystem.demo.service.AppointmentService;
 import lombok.RequiredArgsConstructor;

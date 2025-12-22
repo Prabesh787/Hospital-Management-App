@@ -1,8 +1,7 @@
 package com.HospitalManagementSystem.demo.controller;
 
-import com.HospitalManagementSystem.demo.dto.ApiResponse;
-import com.HospitalManagementSystem.demo.dto.DepartmentRequestDto;
-import com.HospitalManagementSystem.demo.dto.DepartmentResponseDto;
+import com.HospitalManagementSystem.demo.dto.departmentDto.DepartmentRequestDto;
+import com.HospitalManagementSystem.demo.dto.departmentDto.DepartmentResponseDto;
 import com.HospitalManagementSystem.demo.service.DepartmentService;
 //import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

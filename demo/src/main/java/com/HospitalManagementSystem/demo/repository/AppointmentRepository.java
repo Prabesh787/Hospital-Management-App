@@ -1,6 +1,6 @@
 package com.HospitalManagementSystem.demo.repository;
 
-import com.HospitalManagementSystem.demo.entity.Appointment;
+import com.HospitalManagementSystem.demo.entity.transactionalEntity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

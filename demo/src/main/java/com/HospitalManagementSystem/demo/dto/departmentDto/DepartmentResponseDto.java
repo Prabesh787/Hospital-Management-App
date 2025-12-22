@@ -1,6 +1,7 @@
-package com.HospitalManagementSystem.demo.dto;
+package com.HospitalManagementSystem.demo.dto.departmentDto;
 
 
+import com.HospitalManagementSystem.demo.dto.doctorDto.DoctorResponseDto;
 import lombok.*;
 
 import java.util.Set;

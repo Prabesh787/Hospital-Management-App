@@ -1,12 +1,13 @@
-package com.HospitalManagementSystem.demo.entity;
+package com.HospitalManagementSystem.demo.entity.masterEntity;
 
 
+import com.HospitalManagementSystem.demo.entity.transactionalEntity.Appointment;
+import com.HospitalManagementSystem.demo.entity.transactionalEntity.Insurance;
 import com.HospitalManagementSystem.demo.entity.type.BloodGroupType;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

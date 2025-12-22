@@ -1,7 +1,7 @@
 package com.HospitalManagementSystem.demo.security;
 
 
-import com.HospitalManagementSystem.demo.dto.LoginResponseDto;
+import com.HospitalManagementSystem.demo.dto.loginDto.LoginResponseDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

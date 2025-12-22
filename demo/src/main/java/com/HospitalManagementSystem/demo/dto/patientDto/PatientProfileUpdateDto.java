@@ -1,4 +1,4 @@
-package com.HospitalManagementSystem.demo.dto;
+package com.HospitalManagementSystem.demo.dto.patientDto;
 
 import com.HospitalManagementSystem.demo.entity.type.BloodGroupType;
 import lombok.*;

@@ -1,14 +1,9 @@
 package com.HospitalManagementSystem.demo;
 
 
-import com.HospitalManagementSystem.demo.entity.Appointment;
 import com.HospitalManagementSystem.demo.service.AppointmentService;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @SpringBootTest
 public class AppointmentTest {

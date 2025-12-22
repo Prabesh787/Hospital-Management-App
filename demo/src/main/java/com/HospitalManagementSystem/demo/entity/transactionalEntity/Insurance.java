@@ -1,6 +1,7 @@
-package com.HospitalManagementSystem.demo.entity;
+package com.HospitalManagementSystem.demo.entity.transactionalEntity;
 
 
+import com.HospitalManagementSystem.demo.entity.masterEntity.Patient;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,6 +25,10 @@ public class Insurance {
 
     @Column(nullable = false, length = 100)
     private String provider;
+
+    private Double coverageAmount;
+
+    private Double remainingCoverageAmount;
 
     @Column(nullable = false)
     private LocalDate validUntil;

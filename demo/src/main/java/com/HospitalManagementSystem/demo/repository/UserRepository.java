@@ -1,6 +1,6 @@
 package com.HospitalManagementSystem.demo.repository;
 
-import com.HospitalManagementSystem.demo.entity.User;
+import com.HospitalManagementSystem.demo.entity.masterEntity.User;
 import com.HospitalManagementSystem.demo.entity.type.AuthProviderType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

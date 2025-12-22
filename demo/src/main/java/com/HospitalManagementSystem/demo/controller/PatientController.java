@@ -1,8 +1,8 @@
 package com.HospitalManagementSystem.demo.controller;
 
-import com.HospitalManagementSystem.demo.dto.AppointmentResponseDto;
-import com.HospitalManagementSystem.demo.dto.PatientProfileUpdateDto;
-import com.HospitalManagementSystem.demo.dto.PatientResponseDto;
+import com.HospitalManagementSystem.demo.dto.appointmentDto.AppointmentResponseDto;
+import com.HospitalManagementSystem.demo.dto.patientDto.PatientProfileUpdateDto;
+import com.HospitalManagementSystem.demo.dto.patientDto.PatientResponseDto;
 import com.HospitalManagementSystem.demo.security.AuthUtil;
 import com.HospitalManagementSystem.demo.service.AppointmentService;
 import com.HospitalManagementSystem.demo.service.PatientService;

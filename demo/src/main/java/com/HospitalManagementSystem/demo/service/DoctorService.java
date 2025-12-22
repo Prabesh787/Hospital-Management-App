@@ -1,9 +1,9 @@
 package com.HospitalManagementSystem.demo.service;
 
-import com.HospitalManagementSystem.demo.dto.DoctorResponseDto;
-import com.HospitalManagementSystem.demo.dto.OnboardDoctorRequestDto;
-import com.HospitalManagementSystem.demo.entity.Doctor;
-import com.HospitalManagementSystem.demo.entity.User;
+import com.HospitalManagementSystem.demo.dto.doctorDto.DoctorResponseDto;
+import com.HospitalManagementSystem.demo.dto.doctorDto.OnboardDoctorRequestDto;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Doctor;
+import com.HospitalManagementSystem.demo.entity.masterEntity.User;
 import com.HospitalManagementSystem.demo.entity.type.RoleType;
 import com.HospitalManagementSystem.demo.repository.DoctorRepository;
 import com.HospitalManagementSystem.demo.repository.UserRepository;

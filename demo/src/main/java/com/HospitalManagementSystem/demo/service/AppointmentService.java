@@ -1,11 +1,12 @@
 package com.HospitalManagementSystem.demo.service;
 
 
-import com.HospitalManagementSystem.demo.dto.AppointmentResponseDto;
-import com.HospitalManagementSystem.demo.dto.CreateAppointmentRequestDto;
-import com.HospitalManagementSystem.demo.entity.Appointment;
-import com.HospitalManagementSystem.demo.entity.Doctor;
-import com.HospitalManagementSystem.demo.entity.Patient;
+import com.HospitalManagementSystem.demo.dto.appointmentDto.AppointmentResponseDto;
+import com.HospitalManagementSystem.demo.dto.appointmentDto.CreateAppointmentRequestDto;
+import com.HospitalManagementSystem.demo.entity.transactionalEntity.Appointment;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Doctor;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Patient;
+import com.HospitalManagementSystem.demo.entity.type.AppointmentStatus;
 import com.HospitalManagementSystem.demo.repository.AppointmentRepository;
 import com.HospitalManagementSystem.demo.repository.DoctorRepository;
 import com.HospitalManagementSystem.demo.repository.PatientRepository;
@@ -44,6 +45,7 @@ public class AppointmentService {
         Appointment appointment = Appointment.builder()
                 .reason(createAppointmentRequestDto.getReason())
                 .appointmentTime(createAppointmentRequestDto.getAppointmentTime())
+                .appointmentStatus(AppointmentStatus.BOOKED)
                 .build();
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);

@@ -1,4 +1,4 @@
-package com.HospitalManagementSystem.demo.entity;
+package com.HospitalManagementSystem.demo.entity.masterEntity;
 
 
 import jakarta.persistence.*;

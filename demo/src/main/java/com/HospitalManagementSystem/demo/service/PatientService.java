@@ -1,8 +1,8 @@
 package com.HospitalManagementSystem.demo.service;
 
-import com.HospitalManagementSystem.demo.dto.PatientProfileUpdateDto;
-import com.HospitalManagementSystem.demo.dto.PatientResponseDto;
-import com.HospitalManagementSystem.demo.entity.Patient;
+import com.HospitalManagementSystem.demo.dto.patientDto.PatientProfileUpdateDto;
+import com.HospitalManagementSystem.demo.dto.patientDto.PatientResponseDto;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Patient;
 import com.HospitalManagementSystem.demo.repository.PatientRepository;
 import com.HospitalManagementSystem.demo.security.AuthUtil;
 import jakarta.transaction.Transactional;

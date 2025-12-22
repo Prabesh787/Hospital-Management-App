@@ -1,5 +1,6 @@
-package com.HospitalManagementSystem.demo.entity;
+package com.HospitalManagementSystem.demo.entity.masterEntity;
 
+import com.HospitalManagementSystem.demo.entity.transactionalEntity.Appointment;
 import jakarta.persistence.*;
 import lombok.*;
 

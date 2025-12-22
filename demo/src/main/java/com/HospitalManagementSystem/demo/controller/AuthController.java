@@ -1,10 +1,10 @@
 package com.HospitalManagementSystem.demo.controller;
 
 
-import com.HospitalManagementSystem.demo.dto.LoginRequestDto;
-import com.HospitalManagementSystem.demo.dto.LoginResponseDto;
-import com.HospitalManagementSystem.demo.dto.SignUpRequestDto;
-import com.HospitalManagementSystem.demo.dto.SignupResponseDto;
+import com.HospitalManagementSystem.demo.dto.loginDto.LoginRequestDto;
+import com.HospitalManagementSystem.demo.dto.loginDto.LoginResponseDto;
+import com.HospitalManagementSystem.demo.dto.signUpDto.SignUpRequestDto;
+import com.HospitalManagementSystem.demo.dto.signUpDto.SignupResponseDto;
 import com.HospitalManagementSystem.demo.security.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

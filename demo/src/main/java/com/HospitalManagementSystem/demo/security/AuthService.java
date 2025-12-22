@@ -1,12 +1,12 @@
 package com.HospitalManagementSystem.demo.security;
 
 
-import com.HospitalManagementSystem.demo.dto.LoginRequestDto;
-import com.HospitalManagementSystem.demo.dto.LoginResponseDto;
-import com.HospitalManagementSystem.demo.dto.SignUpRequestDto;
-import com.HospitalManagementSystem.demo.dto.SignupResponseDto;
-import com.HospitalManagementSystem.demo.entity.Patient;
-import com.HospitalManagementSystem.demo.entity.User;
+import com.HospitalManagementSystem.demo.dto.loginDto.LoginRequestDto;
+import com.HospitalManagementSystem.demo.dto.loginDto.LoginResponseDto;
+import com.HospitalManagementSystem.demo.dto.signUpDto.SignUpRequestDto;
+import com.HospitalManagementSystem.demo.dto.signUpDto.SignupResponseDto;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Patient;
+import com.HospitalManagementSystem.demo.entity.masterEntity.User;
 import com.HospitalManagementSystem.demo.entity.type.AuthProviderType;
 import com.HospitalManagementSystem.demo.entity.type.RoleType;
 import com.HospitalManagementSystem.demo.repository.PatientRepository;
@@ -22,7 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -38,14 +37,23 @@ public class AuthService {
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword())
+                new UsernamePasswordAuthenticationToken(
+                        loginRequestDto.getUsername(),
+                        loginRequestDto.getPassword()
+                )
         );
 
-        User user = (User) authentication.getPrincipal();
+        // ✅ principal is CustomUserDetails, NOT User entity
+        CustomUserDetails userDetails =
+                (CustomUserDetails) authentication.getPrincipal();
 
-        String token = authUtil.generateAccessToken(user);
+        // ✅ generate token using id + username
+        String token = authUtil.generateAccessToken(
+                userDetails.getId(),
+                userDetails.getUsername()
+        );
 
-        return new LoginResponseDto(token, user.getId());
+        return new LoginResponseDto(token, userDetails.getId());
     }
 
     public User signUpInternal(SignUpRequestDto signupRequestDto, AuthProviderType authProviderType, String providerId) {
@@ -106,7 +114,7 @@ public class AuthService {
             throw new BadCredentialsException("This email is already registered with provider %s".formatted(emailUser.getProviderType()));
         }
 
-        LoginResponseDto loginResponseDto = new LoginResponseDto(authUtil.generateAccessToken(user), user.getId());
+        LoginResponseDto loginResponseDto = new LoginResponseDto(authUtil.generateAccessToken(user.getId(), user.getUsername()), user.getId());
         return ResponseEntity.ok(loginResponseDto);
     }
 }

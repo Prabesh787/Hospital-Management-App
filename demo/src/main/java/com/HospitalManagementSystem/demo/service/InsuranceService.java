@@ -1,10 +1,9 @@
 package com.HospitalManagementSystem.demo.service;
 
 
-import com.HospitalManagementSystem.demo.dto.PatientResponseDto;
-import com.HospitalManagementSystem.demo.entity.Appointment;
-import com.HospitalManagementSystem.demo.entity.Insurance;
-import com.HospitalManagementSystem.demo.entity.Patient;
+import com.HospitalManagementSystem.demo.dto.patientDto.PatientResponseDto;
+import com.HospitalManagementSystem.demo.entity.transactionalEntity.Insurance;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Patient;
 import com.HospitalManagementSystem.demo.repository.DoctorRepository;
 import com.HospitalManagementSystem.demo.repository.InsuranceRepository;
 import com.HospitalManagementSystem.demo.repository.PatientRepository;

@@ -1,8 +1,8 @@
 package com.HospitalManagementSystem.demo.controller;
 
-import com.HospitalManagementSystem.demo.dto.DoctorResponseDto;
-import com.HospitalManagementSystem.demo.dto.OnboardDoctorRequestDto;
-import com.HospitalManagementSystem.demo.dto.PatientResponseDto;
+import com.HospitalManagementSystem.demo.dto.doctorDto.DoctorResponseDto;
+import com.HospitalManagementSystem.demo.dto.doctorDto.OnboardDoctorRequestDto;
+import com.HospitalManagementSystem.demo.dto.patientDto.PatientResponseDto;
 import com.HospitalManagementSystem.demo.service.DoctorService;
 import com.HospitalManagementSystem.demo.service.PatientService;
 import lombok.RequiredArgsConstructor;

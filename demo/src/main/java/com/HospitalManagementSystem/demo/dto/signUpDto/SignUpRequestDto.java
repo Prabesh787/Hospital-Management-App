@@ -1,10 +1,9 @@
-package com.HospitalManagementSystem.demo.dto;
+package com.HospitalManagementSystem.demo.dto.signUpDto;
 
 import com.HospitalManagementSystem.demo.entity.type.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;

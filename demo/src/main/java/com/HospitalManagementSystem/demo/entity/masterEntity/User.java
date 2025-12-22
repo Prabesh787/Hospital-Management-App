@@ -1,4 +1,4 @@
-package com.HospitalManagementSystem.demo.entity;
+package com.HospitalManagementSystem.demo.entity.masterEntity;
 
 import com.HospitalManagementSystem.demo.entity.type.AuthProviderType;
 import com.HospitalManagementSystem.demo.entity.type.RoleType;
@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -34,7 +33,6 @@ public class User implements UserDetails {
 
     @Column(unique = true, nullable = false)
     private String username;
-
 
     private String password;
 
@@ -65,4 +63,5 @@ public class User implements UserDetails {
 
 
     }
+
 }

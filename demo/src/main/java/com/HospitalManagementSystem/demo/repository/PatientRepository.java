@@ -1,6 +1,6 @@
 package com.HospitalManagementSystem.demo.repository;
 
-import com.HospitalManagementSystem.demo.entity.Patient;
+import com.HospitalManagementSystem.demo.entity.masterEntity.Patient;
 import com.HospitalManagementSystem.demo.entity.type.BloodGroupType;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;

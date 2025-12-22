@@ -1,14 +1,13 @@
 package com.HospitalManagementSystem.demo.security;
 
 
-import com.HospitalManagementSystem.demo.entity.User;
+import com.HospitalManagementSystem.demo.entity.masterEntity.User;
 import com.HospitalManagementSystem.demo.entity.type.AuthProviderType;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
 @Component
@@ -32,32 +30,31 @@ public class AuthUtil {
     }
 
     public Long getCurrentUserId() {
-        Authentication authentication = SecurityContextHolder
-                .getContext()
-                .getAuthentication();
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new IllegalStateException("No authenticated user found");
         }
 
-        Object principal = authentication.getPrincipal();
+        CustomUserDetails userDetails =
+                (CustomUserDetails) authentication.getPrincipal();
 
-        if (principal instanceof User user) {
-            return user.getId();
-        }
+        return userDetails.getId();
 
-        throw new IllegalStateException("Unsupported authentication principal: %s".formatted(principal.getClass()));
     }
 
-    public String generateAccessToken(User user){
+
+    public String generateAccessToken(Long userId, String username) {
         return Jwts.builder()
-                .subject(user.getUsername())
-                .claim("userId", user.getId())
+                .subject(username)
+                .claim("userId", userId)
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000*60*10))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
                 .signWith(getSecretKey())
                 .compact();
     }
+
 
     public String getUsernameFromToken(String token){
         Claims claims=Jwts.parser()

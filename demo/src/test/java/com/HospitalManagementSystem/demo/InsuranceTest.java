@@ -1,14 +1,7 @@
 package com.HospitalManagementSystem.demo;
 
 
-import com.HospitalManagementSystem.demo.entity.Insurance;
-import com.HospitalManagementSystem.demo.entity.Patient;
-import com.HospitalManagementSystem.demo.service.InsuranceService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDate;
 
 @SpringBootTest
 public class InsuranceTest {

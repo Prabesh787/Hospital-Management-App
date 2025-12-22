@@ -1,8 +1,8 @@
 package com.HospitalManagementSystem.demo.controller;
 
-import com.HospitalManagementSystem.demo.dto.AppointmentResponseDto;
-import com.HospitalManagementSystem.demo.dto.DoctorResponseDto;
-import com.HospitalManagementSystem.demo.entity.User;
+import com.HospitalManagementSystem.demo.dto.appointmentDto.AppointmentResponseDto;
+import com.HospitalManagementSystem.demo.dto.doctorDto.DoctorResponseDto;
+import com.HospitalManagementSystem.demo.entity.masterEntity.User;
 import com.HospitalManagementSystem.demo.service.AppointmentService;
 import com.HospitalManagementSystem.demo.service.DoctorService;
 import lombok.RequiredArgsConstructor;
