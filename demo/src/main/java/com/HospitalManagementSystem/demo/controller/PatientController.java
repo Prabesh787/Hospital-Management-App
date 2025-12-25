@@ -9,6 +9,7 @@ import com.HospitalManagementSystem.demo.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResponseErrorHandler;
 
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class PatientController{
     public ResponseEntity<PatientResponseDto> getPatientProfile(@PathVariable Long patientId){
         return ResponseEntity.ok(patientService.getPatientById(patientId));
     }
+
+//    @GetMapping("/patient/all")
+//    public ResponseEntity<List<PatientResponseDto>> getAllPatient(){
+//        return ResponseEntity.ok(patientService.getAllPatients());
+//    }
 
     @GetMapping("/appointment/{patientId}")
     public ResponseEntity<List<AppointmentResponseDto>> getPatientAppointment(@PathVariable Long patientId){

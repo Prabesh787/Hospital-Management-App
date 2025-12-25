@@ -79,7 +79,6 @@ public class InvoiceService {
         InvoiceItem consultationItem = invoiceHelper.createConsultationFeeItem(invoice, doctor);
         invoice.getInvoiceItems().add(consultationItem);
 
-
         invoice.calculateTotals();
         Invoice savedInvoice = invoiceRepository.save(invoice);
 

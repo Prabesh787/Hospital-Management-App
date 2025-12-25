@@ -3,10 +3,11 @@ package com.HospitalManagementSystem.demo.dto.patientDto;
 import com.HospitalManagementSystem.demo.entity.type.BloodGroupType;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-public class PatientResponseDto {
+public class PatientResponseDto implements Serializable {
     private Long id;
     private String name;
     private String email;
