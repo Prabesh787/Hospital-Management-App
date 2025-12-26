@@ -7,6 +7,7 @@ import com.HospitalManagementSystem.demo.repository.MedicineRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,7 @@ public class MedicineService {
             return modelMapper.map(medicine, MedicineResponseDto.class);
     }
 
+    @Cacheable(value="medicines")
     public List<MedicineResponseDto> getAllMedicine(){
 
         return medicineRepository.findAll()

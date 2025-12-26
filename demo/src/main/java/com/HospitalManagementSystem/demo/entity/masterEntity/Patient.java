@@ -43,9 +43,9 @@ public class Patient {
     @Column(nullable = false, length = 40)
     private String name;
 
+    private String profileImageUrl;
 
     /* ========= Profile fields (nullable initially) ========= */
-
     @Column(unique = true)
     private String email;
 

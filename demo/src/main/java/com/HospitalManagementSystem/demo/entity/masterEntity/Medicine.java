@@ -3,6 +3,7 @@ package com.HospitalManagementSystem.demo.entity.masterEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Medicine {
+public class Medicine{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

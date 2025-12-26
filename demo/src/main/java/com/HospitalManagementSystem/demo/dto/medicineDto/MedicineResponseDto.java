@@ -2,8 +2,10 @@ package com.HospitalManagementSystem.demo.dto.medicineDto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class MedicineResponseDto {
+public class MedicineResponseDto implements Serializable {
 
     private Long id;
     private String name;

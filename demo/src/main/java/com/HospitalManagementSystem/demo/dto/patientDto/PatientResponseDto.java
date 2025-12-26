@@ -15,4 +15,5 @@ public class PatientResponseDto implements Serializable {
     private LocalDate birthDate;
     private BloodGroupType bloodGroup;
     private Long insurance_id;
+    private String profileImageUrl;
 }

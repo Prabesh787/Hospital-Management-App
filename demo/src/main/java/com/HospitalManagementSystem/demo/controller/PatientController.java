@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,9 +40,12 @@ public class PatientController{
     }
 
     @PatchMapping("/patient/profile/update")
-    public ResponseEntity<PatientResponseDto> updatePatientProfile( @RequestBody PatientProfileUpdateDto patientProfileUpdateDto){
+    public ResponseEntity<PatientResponseDto> updatePatientProfile(
+            @RequestPart PatientProfileUpdateDto patientProfileUpdateDto,
+            @RequestPart(value = "image", required = false) MultipartFile image
+    ){
         Long userId = authUtil.getCurrentUserId();
-        return ResponseEntity.ok(patientService.updatePatientProfile(userId, patientProfileUpdateDto));
+        return ResponseEntity.ok(patientService.updatePatientProfile(userId, patientProfileUpdateDto, image));
     }
 
 }
