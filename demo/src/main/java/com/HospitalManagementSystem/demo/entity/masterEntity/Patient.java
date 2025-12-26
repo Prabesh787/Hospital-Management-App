@@ -45,6 +45,8 @@ public class Patient {
 
     private String profileImageUrl;
 
+    private String imagePublicId;
+
     /* ========= Profile fields (nullable initially) ========= */
     @Column(unique = true)
     private String email;

@@ -1,9 +1,10 @@
 package com.HospitalManagementSystem.demo.service;
 
+import com.HospitalManagementSystem.demo.dto.image.UploadResultDto;
 import com.HospitalManagementSystem.demo.dto.patientDto.PatientProfileUpdateDto;
 import com.HospitalManagementSystem.demo.dto.patientDto.PatientResponseDto;
 import com.HospitalManagementSystem.demo.entity.masterEntity.Patient;
-import com.HospitalManagementSystem.demo.helper.ImageUploader;
+import com.HospitalManagementSystem.demo.helper.CloudinaryHelper;
 import com.HospitalManagementSystem.demo.repository.PatientRepository;
 import com.HospitalManagementSystem.demo.security.AuthUtil;
 import jakarta.transaction.Transactional;
@@ -26,7 +27,8 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final ModelMapper modelMapper;
     private final AuthUtil authUtil;
-    private final ImageUploader imageUploader;
+    private final CloudinaryHelper cloudinaryHelper;
+//    private final UploadResultDto uploadResultDto;
 
     private boolean isProfileComplete(Patient patient) {
         return patient.getEmail() != null &&
@@ -63,8 +65,16 @@ public class PatientService {
         patient.setBloodGroup(patientProfileUpdateDto.getBloodGroup());
 
         if (image != null && !image.isEmpty()) {
-            String imageUrl = imageUploader.upload(image);
-            patient.setProfileImageUrl(imageUrl);
+
+            // Delete old image if exists
+            if (patient.getImagePublicId() != null) {
+                cloudinaryHelper.delete(patient.getImagePublicId());
+            }
+
+          UploadResultDto uploadResult = cloudinaryHelper.upload(image);
+
+            patient.setProfileImageUrl(uploadResult.getUrl());
+            patient.setImagePublicId(uploadResult.getPublicId());
         }
 
         // Compute profile completion
@@ -73,7 +83,5 @@ public class PatientService {
         patient =patientRepository.save(patient);
         return modelMapper.map(patient, PatientResponseDto.class);
     }
-
-
 
 }
