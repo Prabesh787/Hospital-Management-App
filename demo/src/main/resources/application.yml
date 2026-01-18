@@ -1,0 +1,22 @@
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/HospitalManagement
+#    username: postgres
+#    password: admin
+#
+#  data:
+#    redis:
+#      host: redis-12700.crce263.ap-south-1-1.ec2.cloud.redislabs.com
+#      port: 12700
+#      username: default
+#      password: OLdIYsxLYf70MEPDUwJNRPzibJAV307U
+#      ssl:
+#        enabled: false
+#
+#cloudinary:
+#  cloud-name: duug3qw8r
+#  api-key: 711363839645283
+#  api-secret: zIYJTKvoRpwD3PF8MYeNtK1NCjw
+#
+#server:
+#  port: ${PORT:8080}

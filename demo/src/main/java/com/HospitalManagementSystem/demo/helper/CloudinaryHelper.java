@@ -15,7 +15,6 @@ import java.util.Map;
 public class CloudinaryHelper {
 
     private final Cloudinary cloudinary;
-    private final ModelMapper modelMapper;
 
     public UploadResultDto upload(MultipartFile file) {
         try {
@@ -43,7 +42,6 @@ public class CloudinaryHelper {
             throw new RuntimeException("Failed to delete image", e);
         }
     }
-
 }
 
 

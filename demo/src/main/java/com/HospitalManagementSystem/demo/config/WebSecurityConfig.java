@@ -39,10 +39,17 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**", "/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/admin/**")
-                        .hasAnyAuthority(APPOINTMENT_DELETE.name(),
-                                USER_MANAGE.name())
+                        .requestMatchers("/**").permitAll()
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/v3/api-docs.yaml",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ).permitAll()
+//                        .hasAnyAuthority(APPOINTMENT_DELETE.name(),
+//                                USER_MANAGE.name())
                         .requestMatchers("/admin/**").hasRole(ADMIN.name())
                         .requestMatchers("/doctors/**").hasAnyRole(DOCTOR.name(), ADMIN.name())
                         .anyRequest().authenticated()
